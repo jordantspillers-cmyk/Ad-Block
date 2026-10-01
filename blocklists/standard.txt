@@ -1,0 +1,30 @@
+# Standard blocklist profile (recommended).
+# One list URL per line. Lines starting with # are ignored.
+# Applied by scripts/apply-lists.sh. Pi-hole re-downloads these weekly.
+
+# --- Ads, trackers, analytics, malware, phishing (core) ---
+# HaGeZi Multi PRO: broad ad/tracker/malware coverage, very low breakage
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt
+# StevenBlack unified hosts: ads + malware (Pi-hole's long-time default)
+https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+# Pop-up / pop-under ad networks
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/popupads.txt
+
+# --- Stop devices from sneaking around the blocker via encrypted DNS ---
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/doh.txt
+
+# --- Smart TVs, streaming sticks, phones: built-in ads & telemetry ---
+https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/SmartTV.txt
+https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/AmazonFireTV.txt
+https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/android-tracking.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.samsung.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.lgwebos.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.roku.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.amazon.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.apple.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.winoffice.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.tiktok.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.xiaomi.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.huawei.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.oppo-realme.txt
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/native.vivo.txt

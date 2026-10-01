@@ -1,0 +1,22 @@
+# Domains that must never be blocked (one per line, # for comments).
+# These keep common services working that aggressive lists sometimes catch.
+# Add your own when something you use breaks — check the dashboard's
+# Query Log to see which domain was blocked.
+
+# Device "am I online?" checks — blocking these makes Wi-Fi look broken
+connectivitycheck.gstatic.com
+connectivitycheck.android.com
+clients3.google.com
+www.msftconnecttest.com
+www.msftncsi.com
+captive.apple.com
+
+# YouTube watch history / Google Play / Android app updates
+s.youtube.com
+android.clients.google.com
+play.googleapis.com
+
+# Apple / Microsoft sign-in & updates
+appleid.apple.com
+mesu.apple.com
+login.live.com

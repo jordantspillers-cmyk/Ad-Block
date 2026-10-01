@@ -1,0 +1,4 @@
+# Extra domains you want blocked on top of the lists (one per line).
+# Blocking a domain also blocks all of its subdomains.
+# Example:
+# ads.example.com

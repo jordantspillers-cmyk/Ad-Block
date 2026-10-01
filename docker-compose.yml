@@ -1,0 +1,54 @@
+# Network-wide ad blocker (Pi-hole v6).
+#
+# Every device on your Wi-Fi that uses this machine as its DNS server gets
+# ads, trackers, telemetry and malware domains blocked — phones, laptops,
+# smart TVs, game consoles, IoT gadgets, guests' devices — with nothing to
+# install on the devices themselves.
+#
+# Use scripts/install.sh for a guided setup, or:
+#   cp .env.example .env   # then edit it
+#   docker compose up -d
+#   ./scripts/apply-lists.sh
+
+services:
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    hostname: adblock
+    restart: unless-stopped
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "${WEB_PORT:-8080}:80/tcp"
+    environment:
+      TZ: "${TZ:-America/New_York}"
+      FTLCONF_webserver_api_password: "${WEB_PASSWORD:?Set WEB_PASSWORD in .env}"
+      # Upstream resolvers Pi-hole forwards allowed queries to (semicolon separated).
+      FTLCONF_dns_upstreams: "${UPSTREAM_DNS:-9.9.9.9;149.112.112.112}"
+      # Required when running behind Docker's bridge network so that queries
+      # from your LAN (which arrive from a non-local subnet) are answered.
+      FTLCONF_dns_listeningMode: "ALL"
+      # Answer blocked queries with 0.0.0.0 / :: (fastest, least breakage).
+      FTLCONF_dns_blocking_mode: "NULL"
+      # Stop apps from quietly bypassing the blocker:
+      #  - Firefox's DNS-over-HTTPS canary domain -> tells Firefox not to use DoH
+      #  - Apple iCloud Private Relay -> devices fall back to normal DNS
+      FTLCONF_dns_specialDomains_mozillaCanary: "true"
+      FTLCONF_dns_specialDomains_iCloudPrivateRelay: "true"
+      FTLCONF_dns_specialDomains_designatedResolver: "true"
+      # Larger cache = faster browsing for the whole house.
+      FTLCONF_dns_cache_size: "10000"
+      # Keep 30 days of query history for the dashboard.
+      FTLCONF_database_maxDBdays: "30"
+      # The host keeps the clock; skip Pi-hole's own NTP client (needs extra privileges).
+      FTLCONF_ntp_sync_active: "false"
+    volumes:
+      - ./data/pihole:/etc/pihole
+    cap_add:
+      - SYS_NICE
+    healthcheck:
+      test: ["CMD-SHELL", "dig +short +norecurse +retry=0 @127.0.0.1 pi.hole >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s

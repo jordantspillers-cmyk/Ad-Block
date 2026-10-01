@@ -1,0 +1,52 @@
+# DHCP-server variant — use ONLY if your router does not let you change the
+# DNS server it hands out (common with some ISP-supplied routers).
+#
+# In this mode Pi-hole replaces your router's DHCP server, so every device
+# that joins the Wi-Fi is automatically told to use Pi-hole for DNS.
+# You MUST turn off DHCP on your router after this is running.
+# See docs/ROUTER-SETUP.md, "Option B".
+#
+#   docker compose -f docker-compose.dhcp.yml up -d
+#
+# Host networking is required so Pi-hole can see DHCP broadcasts.
+
+services:
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole
+    hostname: adblock
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      TZ: "${TZ:-America/New_York}"
+      FTLCONF_webserver_api_password: "${WEB_PASSWORD:?Set WEB_PASSWORD in .env}"
+      FTLCONF_webserver_port: "${WEB_PORT:-8080}"
+      FTLCONF_dns_upstreams: "${UPSTREAM_DNS:-9.9.9.9;149.112.112.112}"
+      FTLCONF_dns_listeningMode: "LOCAL"
+      FTLCONF_dns_blocking_mode: "NULL"
+      FTLCONF_dns_specialDomains_mozillaCanary: "true"
+      FTLCONF_dns_specialDomains_iCloudPrivateRelay: "true"
+      FTLCONF_dns_specialDomains_designatedResolver: "true"
+      FTLCONF_dns_cache_size: "10000"
+      FTLCONF_database_maxDBdays: "30"
+      # The host keeps the clock; skip Pi-hole's own NTP client (needs extra privileges).
+      FTLCONF_ntp_sync_active: "false"
+      # --- DHCP server ---
+      FTLCONF_dhcp_active: "true"
+      FTLCONF_dhcp_start: "${DHCP_START:?Set DHCP_START in .env}"
+      FTLCONF_dhcp_end: "${DHCP_END:?Set DHCP_END in .env}"
+      FTLCONF_dhcp_router: "${DHCP_ROUTER:?Set DHCP_ROUTER (your router's IP) in .env}"
+      FTLCONF_dhcp_netmask: "${DHCP_NETMASK:-255.255.255.0}"
+      FTLCONF_dhcp_leaseTime: "24h"
+      FTLCONF_dhcp_rapidCommit: "true"
+    volumes:
+      - ./data/pihole:/etc/pihole
+    cap_add:
+      - NET_ADMIN
+      - SYS_NICE
+    healthcheck:
+      test: ["CMD-SHELL", "dig +short +norecurse +retry=0 @127.0.0.1 pi.hole >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s

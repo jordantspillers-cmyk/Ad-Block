@@ -1,0 +1,11 @@
+# Aggressive profile: everything in standard.txt PLUS the lists below.
+# Blocks noticeably more, but some sites/apps may misbehave (e.g. shopping
+# "sponsored" links, some email click-tracking links). Unblock individual
+# domains in allowlist.txt or from the dashboard.
+
+# HaGeZi Multi PRO++ (superset of PRO, more aggressive)
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.plus.txt
+# HaGeZi Threat Intelligence Feeds: malware, phishing, scams, cryptojacking
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/tif.medium.txt
+# Session-replay scripts (record everything you do on a page)
+https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/SessionReplay.txt
