@@ -9,6 +9,10 @@ It runs [Pi-hole](https://pi-hole.net) in Docker with a curated set of
 blocklists (about 300,000 domains in the default profile, over 1,000,000 in the
 aggressive one) and scripts that set it up and keep it updated.
 
+> **Want YouTube ads gone too?** DNS blocking can't stop YouTube ads because they
+> come from the same servers as the videos. Use the companion Chrome extension in
+> [`youtube-extension/`](youtube-extension/README.md).
+
 ## How it works
 
 ```

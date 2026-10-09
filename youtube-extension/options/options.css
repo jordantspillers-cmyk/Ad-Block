@@ -1,0 +1,12 @@
+main { max-width: 640px; margin: 0 auto; padding: 32px 16px 48px; display: grid; gap: 20px; }
+h1 { font-size: 20px; }
+h2 { font-size: 15px; margin-bottom: 6px; }
+.brand img { width: 36px; height: 36px; }
+.card { border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; }
+.card p { margin: 8px 0 0; }
+.small { font-size: 12.5px; }
+.stats { margin-top: 8px; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+#message.ok { color: var(--ok); }
+#message.err { color: var(--accent); }
+.row.disabled .label { opacity: .5; }

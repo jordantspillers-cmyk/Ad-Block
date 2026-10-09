@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TubeShield</title>
+  <link rel="stylesheet" href="../src/shared/ui.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="brand">
+    <img src="../icons/icon48.png" alt="">
+    <div>
+      <h1>TubeShield</h1>
+      <div id="status" class="muted">Protecting YouTube</div>
+    </div>
+    <label class="switch" title="Turn TubeShield on or off">
+      <input type="checkbox" id="enabled" aria-label="TubeShield on">
+      <span class="track"></span>
+    </label>
+  </header>
+
+  <section class="stats">
+    <div class="stat"><b id="adsPruned">0</b><span>video ads removed</span></div>
+    <div class="stat"><b id="adsSkipped">0</b><span>ads auto-skipped</span></div>
+  </section>
+
+  <p class="note muted">Changes apply to new pages. <button id="reload" class="link">Reload this tab</button></p>
+
+  <footer>
+    <span class="muted">No tracking. Data stays on this computer.</span>
+    <button id="openOptions">Settings</button>
+  </footer>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

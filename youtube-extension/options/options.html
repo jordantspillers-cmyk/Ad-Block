@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TubeShield Settings</title>
+  <link rel="stylesheet" href="../src/shared/ui.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <header class="brand">
+      <img src="../icons/icon48.png" alt="">
+      <div>
+        <h1>TubeShield settings</h1>
+        <div class="muted">Private YouTube ad blocker</div>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Blocking</h2>
+      <div id="toggles"></div>
+      <p class="muted small">Changes apply to YouTube tabs you open or reload after changing them.</p>
+    </section>
+
+    <section class="card">
+      <h2>Your stats</h2>
+      <div class="stats">
+        <div class="stat"><b id="adsPruned">0</b><span>video ads removed before loading</span></div>
+        <div class="stat"><b id="adsSkipped">0</b><span>ads auto-skipped</span></div>
+      </div>
+      <p class="muted small" id="since"></p>
+    </section>
+
+    <section class="card">
+      <h2>Your data</h2>
+      <p>TubeShield has no servers, no accounts and no analytics. It never sends anything about you or
+        what you watch anywhere. The only data it keeps is your settings and the two counters above,
+        stored in Chrome on this computer.</p>
+      <div class="actions">
+        <button id="export" class="primary">Export my data</button>
+        <button id="import">Import data…</button>
+        <input type="file" id="importFile" accept="application/json,.json" hidden>
+        <button id="resetStats">Reset stats</button>
+        <button id="resetAll">Reset everything</button>
+      </div>
+      <p id="message" class="small" role="status"></p>
+    </section>
+
+    <footer class="muted small">TubeShield <span id="version"></span></footer>
+  </main>
+  <script type="module" src="options.js"></script>
+</body>
+</html>
